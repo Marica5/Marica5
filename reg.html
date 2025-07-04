@@ -1,3 +1,6 @@
+Ще преместя блока с информация за хотела след формата за регистрация. Ето променения код:
+
+```html
 <!DOCTYPE html>
 <html lang="bg">
 <head>
@@ -518,12 +521,6 @@
             </ul>
         </div>
         
-        <div class="hotel-info">
-            <h3><i class="fas fa-hotel"></i> Настаняване в Димитровград</h3>
-            <p>За участниците, които искат да отседнат в Димитровград, препоръчваме хотел <strong>Естило Град</strong>, разположен в центъра на града.</p>
-            <a href="https://estilograd.com" target="_blank"><i class="fas fa-external-link-alt"></i> Посетете сайта на хотела</a>
-        </div>
-        
         <form id="payment-form">
             <label for="name">Име и фамилия</label>
             <input type="text" id="name" name="name" required>
@@ -594,6 +591,13 @@
             
             <button type="submit" id="register-button" style="margin-top: 20px;">Регистрирай се</button>
         </form>
+
+        <!-- Преместен блок за хотела след формата за регистрация -->
+        <div class="hotel-info">
+            <h3><i class="fas fa-hotel"></i> Настаняване в Димитровград</h3>
+            <p>За участниците, които искат да отседнат в Димитровград, препоръчваме хотел <strong>Естило Град</strong>, разположен в центъра на града.</p>
+            <a href="https://estilograd.com" target="_blank"><i class="fas fa-external-link-alt"></i> Посетете сайта на хотела</a>
+        </div>
     </div>
 
     <div id="success-modal" class="modal">
