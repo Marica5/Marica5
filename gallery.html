@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Спонсори - МарицаRUN</title>
+    <title>Галерия - МарицаRUN</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -181,15 +181,15 @@
             margin-bottom: 30px;
         }
 
-        /* Секция за спонсори */
-        .sponsor-section {
+        /* Галерия секция */
+        .gallery-section {
             padding: 80px 5%;
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
         }
 
-        .sponsor-section h2 {
+        .gallery-section h2 {
             font-family: 'Montserrat', sans-serif;
             font-size: 2.5rem;
             color: var(--primary-dark);
@@ -197,7 +197,7 @@
             position: relative;
         }
 
-        .sponsor-section h2::after {
+        .gallery-section h2::after {
             content: '';
             position: absolute;
             width: 80px;
@@ -209,89 +209,127 @@
             border-radius: 2px;
         }
 
-        .sponsor-category {
-            margin-bottom: 60px;
-        }
-
-        .sponsor-category h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            color: var(--primary-dark);
-            margin-bottom: 30px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .sponsor-category h3::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 3px;
-            background: var(--secondary-color);
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .sponsors-grid {
+        .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 40px;
+            gap: 30px;
             margin-top: 30px;
-            align-items: center;
-            justify-items: center;
         }
 
-        .main-sponsor {
-            grid-column: 1 / -1;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .sponsor-item {
-            background: white;
+        .gallery-item {
+            position: relative;
             border-radius: 10px;
-            padding: 30px;
+            overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            width: 100%;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            position: relative;
+            aspect-ratio: 4/3;
         }
 
-        .sponsor-item:hover {
+        .gallery-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
 
-        .sponsor-img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            transition: transform 0.3s ease;
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .sponsor-item:hover .sponsor-img {
-            transform: scale(1.05);
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
         }
 
-        /* Съдействие секция */
-        .cooperation {
+        /* Стилове за линковете към албумите */
+        .album-links {
             margin-top: 60px;
-            padding: 30px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary-color);
+            text-align: center;
         }
 
-        .cooperation h3 {
+        .album-links h3 {
             font-family: 'Montserrat', sans-serif;
             color: var(--primary-dark);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .album-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
             margin-bottom: 20px;
+        }
+
+        .album-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .album-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .album-btn.secondary {
+            background-color: var(--secondary-color);
+        }
+
+        .album-btn i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .album-note {
+            font-style: italic;
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Модален прозорец */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 60px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: var(--secondary-color);
         }
 
         /* Анимации */
@@ -306,16 +344,21 @@
             }
         }
 
-        .sponsor-item {
+        .gallery-item {
             animation: fadeInScale 0.6s ease forwards;
             opacity: 0;
         }
 
-        .main-sponsor { animation-delay: 0.1s; }
-        .sponsor-item:nth-child(1) { animation-delay: 0.2s; }
-        .sponsor-item:nth-child(2) { animation-delay: 0.3s; }
-        .sponsor-item:nth-child(3) { animation-delay: 0.4s; }
-        .sponsor-item:nth-child(4) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+        .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+        .gallery-item:nth-child(9) { animation-delay: 0.9s; }
+        .gallery-item:nth-child(10) { animation-delay: 1.0s; }
 
         /* Адаптивен дизайн */
         @media (max-width: 768px) {
@@ -386,9 +429,23 @@
             .navbar.scrolled .nav-links {
                 background: rgba(46, 125, 50, 0.95);
             }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .album-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .album-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
         }
 
-        /* Още по-големи разстояния за много малки екрани */
         @media (max-width: 480px) {
             .nav-links a {
                 margin: 20px 0;
@@ -399,31 +456,19 @@
             .nav-links {
                 padding: 100px 20px;
             }
-        }
 
-        /* Още по-големи разстояния за много малки екрани */
-        @media (max-width: 480px) {
-            .nav-links a {
-                margin: 35px 0; /* Максимално разстояние за малки екрани */
-                padding: 25px 30px;
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sponsor-section h2 {
+            .gallery-section h2 {
                 font-size: 1.8rem;
                 margin-bottom: 40px;
             }
             
-            .sponsors-grid {
+            .gallery-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
-            .sponsor-item {
-                height: 150px;
-                padding: 15px;
+
+            .album-links h3 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -447,68 +492,60 @@
             <li><a href="index.html">Начало</a></li>
             <li><a href="information.html">Информация</a></li>
             <li><a href="reg.html">Записване</a></li>
-            <li><a href="gallery.html">Галерия</a></li>
-            <li><a href="spons.html" class="active">Спонсори</a></li>
+            <li><a href="gallery.html" class="active">Галерия</a></li>
+            <li><a href="spons.html">Спонсори</a></li>
         </ul>
     </nav>
 
     <!-- Хедър с герой изображение -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Нашите спонсори</h1>
-            <p>Благодарим на всички, които подкрепят събитието ни</p>
+            <h1>Галерия</h1>
+            <p>Споделени моменти от предишни издания на Марица 5</p>
         </div>
     </section>
 
-    <!-- Секция за спонсори -->
-    <div class="sponsor-section">
-        <h2>Те правят възможно състезанието МарицаRUN!</h2>
+    <!-- Секция за галерия -->
+    <div class="gallery-section">
+        <h2>Снимки от събитието</h2>
         
-        <!-- Главен спонсор -->
-        <div class="sponsor-category">
-            <h3>Главен Спонсор</h3>
-            <div class="sponsors-grid">
-                <a href="https://www.decathlon.bg/" target="Decathlon" class="sponsor-item main-sponsor">
-                    <img src="dk.jpeg" alt="Главен спонсор" class="sponsor-img">
+        <div class="gallery-grid">
+            <!-- Примерни снимки - заменете с вашите -->
+            <div class="gallery-item">
+                <img src="DSC03827.jpg" alt="DSC03829" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="DSC03830.jpg" alt="_DSC9885" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="_DSC0493.jpg" alt="DSC03831" class="gallery-img">
+            </div>
+             <div class="gallery-item">
+                <img src="_DSC9885.jpg" alt="DSC03831" class="gallery-img">
+            </div>
+             <div class="gallery-item">
+                <img src="DSC04049.jpg" alt="DSC03831" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="_DSC0170.jpg" alt="DSC03835" class="gallery-img">
+        </div>
+
+        <!-- Добавена секция с линкове към албумите -->
+        <div class="album-links">
+            <h3>Вижте всички снимки от събитието</h3>
+            <div class="album-buttons">
+                <a href="https://drive.google.com/drive/folders/1q76bsiChokg4MfgfCwT5L6yys3VEheoz?fbclid=IwY2xjawKOm-1leHRuA2FlbQIxMABicmlkETA3UlZ6dXA2RDQ1OWtFTEVWAR69hmwjOvh6LtNWRLHMzTXfJwIjIApl8SL2GZ1N_aP1O-tgNzaiA_xKhKNj_g_aem_tgFRx-379SU2_xfHY3NfFQ" class="album-btn" target="_blank">
+                    <i class="fas fa-camera"></i> Пълен албум 1
                 </a>
             </div>
+            <p class="album-note">* Натиснете на бутона, за да видите пълната галерия със снимки</p>
         </div>
-        
-        <!-- Останали спонсори -->
-        <div class="sponsor-category">
-            <h3>Спонсори</h3>
-            <div class="sponsors-grid">
-                <a href="https://junona.bg/" target="Junona" class="sponsor-item">
-                    <img src="junona.jpg" alt="Спонсор 1" class="sponsor-img">
-                </a>
-                <a href="https://www.facebook.com/p/%D0%A0%D0%B5%D1%81%D1%82%D0%BE%D1%80%D0%B0%D0%BD%D1%82-%D0%A4%D0%B5%D0%BD%D0%B8%D0%BA%D1%81-100089467933823/" target="_blank" class="sponsor-item">
-                    <img src="feniks.png" alt="Ресторант и пицария Феникс" class="sponsor-img">
-                </a>
-                <a href="https://www.hotelestilo.bg/" target="_blank" class="sponsor-item">
-                    <img src="images.jpg" alt="Estilo" class="sponsor-img">
-                </a>
-                <a href="https://nose-ease.com/?gad_source=1&gad_campaignid=22031084601&gbraid=0AAAAAq2FF2owIVi8nOqsSiVEYBBMa0BrN&gclid=Cj0KCQjw953DBhCyARIsANhIZob8_dvHwXNPloY0BQFTSp1irRZUrFYYImzGB6mU8Oqxh7-J2o_uSwAaAuU9EALw_wcB" target="_blank" class="sponsor-item">
-                    <img src="ne.jpg" alt="Nose-ease" class="sponsor-img">
-                </a>
-                <a href="https://storinvest.bg/" target="_blank" class="sponsor-item">
-                    <img src="si.png" alt="Storinvest" class="sponsor-img">
-                </a>
-                <a href="https://www.arkusmilk.com/" target="_blank" class="sponsor-item">
-                    <img src="аркус.jpg" alt="Аркус 99" class="sponsor-img">
-                </a>
-                <a href="https://abopharma.info/" target="_blank" class="sponsor-item">
-                    <img src="ap.png" alt="AboPharma" class="sponsor-img">
-                </a>
-                 <a href="https://xfuel.bg/en" target="_blank" class="sponsor-item">
-                    <img src="X-fuel.jpg" alt="X-fuel" class="sponsor-img">
-                </a>
-            </div>
-        </div>
-        
-        <!-- Съдействие -->
-        <div class="cooperation">
-            <h3>Събитието се провежда със съдействието на Община Димитровград и Футболен клуб Димитровград-1947</h3>
-        </div>
+    </div>
+
+    <!-- Модален прозорец за големи снимки -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
     </div>
 
     <script>
@@ -547,11 +584,30 @@
             });
         });
 
-        // Добавен ховер ефект за спонсорите
-        document.querySelectorAll('.sponsor-item').forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.cursor = 'pointer';
+        // Модална галерия
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const galleryItems = document.querySelectorAll('.gallery-img');
+
+        // Отваряне на модалния прозорец
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                modal.style.display = 'block';
+                modalImg.src = this.src;
             });
+        });
+
+        // Затваряне на модалния прозорец
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Затваряне при клик извън снимката
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
         });
     </script>
 </body>
