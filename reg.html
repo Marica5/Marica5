@@ -509,12 +509,9 @@
         <div class="pricing-info">
             <h3><i class="fas fa-calendar-alt"></i> Такси за участие:</h3>
             <ul>
-                <li><strong>Ранна регистрация (до 15 август):</strong></li>
-                <li>- 5 км: 20 лв.</li>
-                <li>- 10 км: 25 лв.</li>
-                <li><strong>След 15 август и на място:</strong></li>
                 <li>- 5 км: 25 лв.</li>
                 <li>- 10 км: 30 лв.</li>
+                <li><strong>Деца под 14 години:</strong> Безплатно (0 лв.)</li>
             </ul>
         </div>
         
@@ -559,7 +556,7 @@
                 <button type="button" onclick="redirectToRevolut()" style="margin-top: 10px;">
                     <i class="fas fa-money-bill-wave"></i> Платете с Revolut
                 </button>
-                <p style="margin-top: 10px;"><strong>Сума:</strong> <span id="revolut-amount">20</span> лв.</p>
+                <p style="margin-top: 10px;"><strong>Сума:</strong> <span id="revolut-amount">25</span> лв.</p>
             </div>
             
             <div id="bank-info" class="info-box">
@@ -569,7 +566,7 @@
                 <p><strong>IBAN:</strong> BG47CECB97901085301200</p>
                 <p><strong>BIC/SWIFT:</strong> CECBBGSF</p>
                 <p><strong>Основание:</strong> Регистрация за Марица 5К и вашите имена</p>
-                <p><strong>Сума:</strong> <span id="bank-amount">20</span> лв.</p>
+                <p><strong>Сума:</strong> <span id="bank-amount">25</span> лв.</p>
             </div>
             
             <div id="pay-info" class="info-box">
@@ -624,35 +621,26 @@
         function updateFee() {
             const distance = document.getElementById('distance').value;
             const paymentMethod = document.getElementById('payment').value;
-            const today = new Date();
-            const earlyBirdDeadline = new Date(today.getFullYear(), 7, 15); // 15 август
-            
-            // По подразбиране показваме начални цени
-            let fee = 20; // По подразбиране 5 км ранна регистрация
-            let onsiteFee = 25; // По подразбиране 5 км на място
-            
-            if (distance === '10') {
-                fee = 25;
-                onsiteFee = 30;
+            const age = parseInt(document.getElementById('age').value) || 0;
+
+            let fee = 0;
+
+            if (age < 14) {
+                fee = 0; // Безплатно за деца под 14
+            } else {
+                if (distance === '10') {
+                    fee = 30;
+                } else if (distance === '5') {
+                    fee = 25;
+                }
             }
-            
-            // Проверка за ранна регистрация
-            if (today > earlyBirdDeadline && paymentMethod !== 'onsite') {
-                fee = distance === '10' ? 30 : 25;
-            }
-            
-            // Ако е избрано плащане на място, винаги показваме по-високите цени
-            if (paymentMethod === 'onsite') {
-                fee = onsiteFee;
-            }
-            
-            // Обновяваме всички полета за суми
+
+            // Обновяване на полета
             document.getElementById('fee-amount').textContent = fee;
             document.getElementById('revolut-amount').textContent = fee;
             document.getElementById('bank-amount').textContent = fee;
-            document.getElementById('onsite-amount').textContent = onsiteFee;
-            
-            // Ако е избран метод на плащане, показваме съответната информация
+            document.getElementById('onsite-amount').textContent = fee;
+
             if (paymentMethod) {
                 showPaymentOptions();
             }
@@ -662,7 +650,7 @@
             document.querySelectorAll('.info-box').forEach(function(element) {
                 element.style.display = 'none';
             });
-            
+
             const paymentMethod = document.getElementById('payment').value;
             if (paymentMethod === 'revolut') {
                 document.getElementById('revolut-info').style.display = 'block';
@@ -671,14 +659,12 @@
             } else if (paymentMethod === 'onsite') {
                 document.getElementById('pay-info').style.display = 'block';
             }
-            
-            // Обновяваме сумите при смяна на метода на плащане
+
             updateFee();
         }
 
         function redirectToRevolut() {
             const distance = document.getElementById('distance').value;
-            // Различни линкове за различните дистанции
             const revolutLink = distance === '10' ? 
                 'https://revolut.me/r/NyqVPcqwGO' : 
                 'https://revolut.me/r/mCJh2o3xqZ';
@@ -694,11 +680,11 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Инициализираме цените при зареждане на страницата
-            document.getElementById('revolut-amount').textContent = '20';
-            document.getElementById('bank-amount').textContent = '20';
+            // Първоначални стойности
+            document.getElementById('revolut-amount').textContent = '25';
+            document.getElementById('bank-amount').textContent = '25';
             document.getElementById('onsite-amount').textContent = '25';
-            
+
             document.querySelectorAll('.info-box').forEach(function(element) {
                 element.style.display = 'none';
             });
@@ -710,11 +696,7 @@
                 mobileMenu.classList.toggle('active');
                 navLinks.classList.toggle('active');
                 
-                if (navLinks.classList.contains('active')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
-                }
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
             });
 
             document.querySelectorAll('.nav-links a').forEach(function(link) {
@@ -734,11 +716,10 @@
                 }
             });
 
-            // Слушаме за промени в полето за метод на плащане
+            // Слушаме за промени
             document.getElementById('payment').addEventListener('change', updateFee);
-            
-            // Слушаме за промени в полето за дистанция
             document.getElementById('distance').addEventListener('change', updateFee);
+            document.getElementById('age').addEventListener('input', updateFee);
 
             const form = document.getElementById('payment-form');
             
@@ -751,12 +732,6 @@
                 
                 const paymentMethod = document.getElementById('payment').value;
                 let fee = document.getElementById('fee-amount').textContent;
-                
-                // Ако е избрано плащане на място, използваме по-високите цени
-                if (paymentMethod === 'onsite') {
-                    const distance = document.getElementById('distance').value;
-                    fee = distance === '10' ? '30' : '25';
-                }
                 
                 const formData = {
                     name: document.getElementById('name').value,
@@ -782,10 +757,9 @@
                 .then(function() {
                     document.getElementById('success-modal').style.display = 'flex';
                     form.reset();
-                    // Връщаме началните стойности след успешна регистрация
                     document.getElementById('fee-amount').textContent = '—';
-                    document.getElementById('revolut-amount').textContent = '20';
-                    document.getElementById('bank-amount').textContent = '20';
+                    document.getElementById('revolut-amount').textContent = '25';
+                    document.getElementById('bank-amount').textContent = '25';
                     document.getElementById('onsite-amount').textContent = '25';
                 })
                 .catch(function(error) {
