@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Информация - МарицаRUN</title>
+
+<!-- Fonts + Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+:root {
+  --primary: #00c853;
+  --secondary: #ff6d00;
+  --dark: #0b0f14;
+  --glass: rgba(255, 255, 255, 0.08);
+  --radius: 22px;
+  --shadow: 0 20px 60px rgba(0,0,0,0.35);
+  --text-light: #fff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: "Montserrat", sans-serif; }
+body { background: var(--dark); color: white; overflow-x: hidden; }
+
+/* NAVBAR */
+.navbar { position: fixed; top: 0; width: 100%; padding: 18px 7%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.6); backdrop-filter: blur(15px); z-index: 999; transition: 0.4s; }
+.nav-logo { font-size: 1.4rem; font-weight: 800; color: white; text-decoration: none; display: flex; gap: 10px; align-items: center; }
+.nav-logo i { color: var(--secondary); }
+.nav-links { display: flex; gap: 25px; list-style: none; }
+.nav-links a { color: white; text-decoration: none; font-weight: 600; transition: 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--secondary); }
+
+/* BURGER */
+.menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+.menu-toggle span { width: 28px; height: 3px; background: white; border-radius: 5px; transition: 0.3s; }
+
+/* MOBILE MENU */
+@media(max-width:768px){
+  .menu-toggle { display: flex; }
+  .nav-links { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); flex-direction: column; justify-content: center; align-items: center; gap: 25px; transition: 0.4s; }
+  .nav-links.active { right: 0; }
+  .nav-links a { font-size: 1.5rem; }
+}
+
+/* HERO */
+.hero { height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at top, rgba(0,255,100,0.25), transparent), linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.9)), url("bkg3.jpg") center/cover; }
+.hero-content { max-width: 850px; padding: 0 15px; animation: fadeUp 1.2s ease forwards; opacity: 0; }
+.hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; margin-bottom: 15px; }
+.hero p { font-size: 1.2rem; opacity: 0.85; }
+
+/* FADEUP ANIMATION */
+@keyframes fadeUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* CONTAINER */
+.container { width: 90%; max-width: 1200px; margin: auto; padding: 80px 0; }
+
+/* SECTION TITLE */
+.section-title h2 { text-align: center; font-size: 2.3rem; margin: 70px 0 40px; }
+.section-title h2::after { content: ""; display: block; width: 90px; height: 4px; background: var(--secondary); margin: 15px auto 0; border-radius: 10px; }
+
+/* GLASS CARD */
+.glass { background: var(--glass); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(18px); box-shadow: var(--shadow); border-radius: var(--radius); padding: 45px; margin-bottom: 60px; }
+
+/* ⭐ CHARITY UPGRADE */
+.charity-highlight{
+background: linear-gradient(135deg, rgba(255,109,0,0.25), rgba(255,255,255,0.05));
+border:1px solid rgba(255,109,0,0.4);
+box-shadow:0 0 40px rgba(255,109,0,0.35);
+position:relative;
+overflow:hidden;
+}
+
+.charity-badge{
+display:inline-block;
+background:var(--secondary);
+padding:6px 14px;
+border-radius:999px;
+font-weight:700;
+margin-bottom:15px;
+box-shadow:0 0 15px rgba(255,109,0,0.7);
+}
+
+/* SCHEDULE */
+.schedule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+.schedule-day { padding: 25px; border-left: 4px solid var(--secondary); background: rgba(255,255,255,0.05); border-radius: 15px; }
+.schedule-day h4 { margin-bottom: 15px; color: var(--secondary); }
+.schedule-time { font-weight: 700; color: white; }
+.important-note { margin-top: 25px; padding: 18px; border-left: 4px solid var(--secondary); background: rgba(255, 109, 0, 0.15); border-radius: 12px; font-weight: 600; }
+
+/* FEATURES */
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+.feature-card { padding: 30px; transition: 0.35s; text-align: center; }
+.feature-card:hover { transform: translateY(-10px); }
+.feature-icon { font-size: 2.5rem; color: var(--secondary); margin-bottom: 15px; }
+
+/* CATEGORIES */
+.categories { display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; }
+.category { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); padding: 15px 30px; border-radius: 999px; transition: 0.3s; font-weight: 600; }
+.category:hover { background: var(--secondary); }
+
+/* ROUTE */
+.route-container { display: flex; flex-wrap: wrap; gap: 25px; align-items: center; }
+.route-container img { width: 100%; max-width: 500px; border-radius: var(--radius); box-shadow: var(--shadow); }
+.route-details { flex: 1; }
+.route-details ul { margin-top: 15px; padding-left: 20px; }
+.route-details li { margin-bottom: 10px; opacity: 0.85; }
+
+/* BUTTON */
+.btn-container { text-align: center; margin-top: 40px; }
+.btn { padding: 18px 55px; border-radius: 999px; font-weight: 700; border: none; cursor: pointer; font-size: 1.05rem; text-transform: uppercase; color: white; background: linear-gradient(90deg, var(--secondary), #ff9100); box-shadow: 0 0 35px rgba(255,110,0,0.6); transition: 0.35s; text-decoration: none; }
+.btn:hover { transform: translateY(-6px) scale(1.05); }
+
+/* FOOTER */
+footer { padding: 70px; text-align: center; background: black; margin-top: 80px; }
+.social-links a { font-size: 1.6rem; margin: 0 12px; color: white; transition: 0.3s; }
+.social-links a:hover { color: var(--secondary); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo"><i class="fas fa-running"></i> МарицаRUN</a>
+  <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Начало</a></li>
+    <li><a href="information.html" class="active">Информация</a></li>
+    <li><a href="https://tracksport.live/e/maricarien-2026" target="_blank" rel="noopener noreferrer">Записване</a></li>
+    <li><a href="gallery.html">Галерия</a></li>
+    <li><a href="spons.html">Спонсори</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero reveal">
+  <div class="hero-content">
+    <h1>Информация за състезанието</h1>
+    <p>Всичко важно за MaricaRUN 2025</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- PROGRAM -->
+  <div class="glass reveal">
+    <h2 class="reveal" style="text-align:center; margin-bottom:30px;"><i class="fas fa-calendar-alt"></i> Програма</h2>
+    <div class="schedule-grid">
+      <div class="schedule-day reveal">
+        <h4>1 май</h4>
+        <p class="schedule-time">18:00–20:00</p>
+        <p>Взимане на стартови пакети</p>
+        <p>(може и в деня на състезанието)</p>
+      </div>
+      <div class="schedule-day reveal">
+        <h4>2 май</h4>
+        <p class="schedule-time">10:00</p>
+        <p>Старт 10 км</p>
+        <p class="schedule-time">10:15</p>
+        <p>Старт 5 км</p>
+        <p class="schedule-time">10:20</p>
+        <p>Старт 1 км Детско бягане-"Крачка напред"</p>
+        <p class="schedule-time">11:40</p>
+        <p>Награждаване</p>
+      </div>
+    </div>
+    <div class="important-note reveal">⚠ Препоръчваме да вземете пакета си предварително!</div>
+  </div>
+
+  <!-- ⭐ CHARITY  -->
+<div class="section-title reveal"><h2>Благотворителна кауза</h2></div>
+
+<div class="glass charity-highlight reveal">
+<div class="charity-badge">40% Charity Impact</div>
+
+<h3 style="margin-bottom:15px;">
+<i class="fas fa-hand-holding-heart"></i> Бягаме с мисия
+</h3>
+
+<p style="margin-bottom:16px;">
+MaricaRUN е повече от състезание — това е събитие с кауза.
+</p>
+
+<p style="margin-bottom:16px;">
+❤️ <strong>40% от всички стартови такси на участниците се даряват за благотворителност.</strong>
+С всяка регистрация вие помагате за реална положителна промяна.
+</p>
+
+<p>
+Благодарим на всички бегачи, партньори и доброволци, които подкрепят тази инициатива!
+</p>
+</div>
+
+  <!-- FEATURES -->
+  <div class="section-title reveal"><h2>Какво ви очаква</h2></div>
+  <div class="features-grid">
+    <div class="glass feature-card reveal"><div class="feature-icon"><i class="fas fa-trophy"></i></div><h3>Награди</h3><ul><li>Фонд над 3000лв</li><li>Медали за всички</li></ul></div>
+    <div class="glass feature-card reveal"><div class="feature-icon"><i class="fas fa-camera"></i></div><h3>Моменти</h3><ul><li>Фотографи</li><li>DJ атмосфера</li></ul></div>
+    <div class="glass feature-card reveal"><div class="feature-icon"><i class="fas fa-heartbeat"></i></div><h3>Безопасност</h3><ul><li>Медицински екип</li><li>Вода и плодове</li></ul></div>
+    <div class="glass feature-card reveal"><div class="feature-icon"><i class="fas fa-gift"></i></div><h3>Бонуси</h3><ul><li>Подаръци от спонсори</li><li>Стартов пакет</li></ul></div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section-title reveal"><h2>Категории</h2></div>
+  <div class="categories reveal">
+    <div class="category"> Под 14 г.</div>
+    <div class="category">Под 20 г.</div>
+    <div class="category">20–39 г.</div>
+    <div class="category">Над 39 г.</div>
+  </div>
+
+  <!-- ROUTE -->
+  <div class="section-title reveal"><h2>Маршрут</h2></div>
+  <div class="glass route-container reveal">
+    <img src="Copy of Copy of Доброволци.jpg" alt="Маршрут">
+    <div class="route-details">
+      <h3>Детайли</h3>
+      <p>Маршрутът е равен и подходящ за всички.</p>
+      <ul>
+        <li>Старт: Централен вход.</li>
+        <li>Насочваме се към централната част на парка.</li>
+        <li>Близо половин километър по-късно правим лек завой на югоизток и се отправяме към киноложкия център.</li>
+        <li>След това се движим към дигата, следвайки поречието на река Марица, като правим отбивка за обиколка на релакс зоната с гледка към водата.</li>
+        <li>Впоследствие отново се запътваме към централна част на парка и правим лека обиколка край двете розети, така най-накрая поемаме към финиша.</li>
+        <li>Финиш: Отново централния вход на парка.</li>
+        <li>Маршрута за 10 км е 2 обиколки.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section-title reveal"><h2>За състезанието</h2></div>
+  <div class="glass reveal">
+    <p style="margin-bottom:16px;">Заповядайте на MaricaRUN 2026 – уникално спортно събитие с дистанции 5 и 10 километра(както и 1 км детско бягане), което ще се проведе в красивия парк „Марица“ в Димитровград. Събитието предлага вълнуващо изживяване както за опитни бегачи, така и за любители на активния начин на живот и спорта сред природата.</p>
+  <p style="margin-bottom:16px;">Маршрутът преминава през най-красивите части на парка, като следва течението на река Марица и включва релакс зони с прекрасна гледка към водата. Участниците ще имат възможност да се насладят на безопасен и добре организиран маршрут с хидратиращи и подкрепителни пунктове по трасето.</p>
+  <p style="margin-bottom:16px;">На финала всички участници ще бъдат наградени с медали, а победителите в отделните категории ще получат купи, ваучери за спортни стоки, здравословни подаръци и други специални изненади. За допълнителна атракция са предвидени спортни демонстрации, предизвикателства за физическа активност и томбола с награди, осигурени от партньори.</p>
+  <p style="margin-bottom:16px;">MaricaRUN 2026 е повече от състезание – това е празник на спорта, здравословния начин на живот и активните приключения сред природата. Очакват ви емоции, енергия и незабравими мигове на бягане в сърцето на Димитровград!</p>
+</div>
+
+  <!-- BUTTON -->
+  <div class="btn-container reveal">
+   <a href="https://tracksport.live/e/maricarien-2026" class="btn" target="_blank" rel="noopener noreferrer">
+    Запиши се
+</a>
+
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="social-links">
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+  </div>
+  <p>© 2025 МарицаRUN</p>
+</footer>
+
+<script>
+  // Mobile menu
+  const mobileMenu = document.getElementById("mobile-menu");
+  const navLinks = document.getElementById("nav-links");
+  mobileMenu.addEventListener("click", () => { navLinks.classList.toggle("active"); });
+
+  // Reveal animation same as index.html
+  const reveals = document.querySelectorAll(".reveal");
+  function revealOnScroll() {
+    reveals.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      if(top < windowHeight - 120) el.classList.add("active");
+    });
+  }
+  window.addEventListener("scroll", revealOnScroll);
+  window.addEventListener("load", revealOnScroll);
+</script>
+
+</body>
+</html>
+
