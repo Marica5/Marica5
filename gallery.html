@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Галерия - МарицаRUN</title>
+
+<!-- Fonts + Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+:root {
+  --primary: #00c853;
+  --secondary: #ff6d00;
+  --dark: #0b0f14;
+  --glass: rgba(255, 255, 255, 0.08);
+  --radius: 22px;
+  --shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Montserrat", sans-serif; background: var(--dark); color: white; overflow-x: hidden; }
+
+/* NAVBAR */
+.navbar { position: fixed; top: 0; width: 100%; padding: 18px 7%; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.6); backdrop-filter: blur(15px); z-index: 999; transition: 0.4s; }
+.nav-logo { font-size: 1.4rem; font-weight: 800; color: white; text-decoration: none; display: flex; gap: 10px; align-items: center; }
+.nav-logo i { color: var(--secondary); }
+.nav-links { display: flex; gap: 25px; list-style: none; }
+.nav-links a { color: white; text-decoration: none; font-weight: 600; transition: 0.3s; }
+.nav-links a:hover, .nav-links a.active { color: var(--secondary); }
+
+/* BURGER MENU */
+.menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; }
+.menu-toggle span { width: 28px; height: 3px; background: white; border-radius: 5px; transition: 0.3s; }
+@media(max-width:768px){
+  .menu-toggle { display: flex; }
+  .nav-links { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); flex-direction: column; justify-content: center; align-items: center; gap: 25px; transition: 0.4s; }
+  .nav-links.active { right: 0; }
+  .nav-links a { font-size: 1.5rem; }
+}
+
+/* HERO */
+.hero { height: 55vh; display: flex; align-items: center; justify-content: center; text-align: center; margin-top: 70px; background: radial-gradient(circle at top, rgba(255,110,0,0.25), transparent), linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url("bkg3.jpg") center/cover; }
+.hero-content { animation: fadeUp 1.2s ease forwards; opacity: 0; }
+.hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; }
+.hero p { opacity: 0.85; margin-top: 15px; }
+
+/* FADEUP ANIMATION */
+@keyframes fadeUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* SECTION */
+.section { padding: 80px 8%; max-width: 1300px; margin: auto; }
+.section-title { text-align: center; font-size: 2.2rem; margin-bottom: 50px; }
+.section-title::after { content: ""; display: block; width: 90px; height: 4px; background: var(--secondary); margin: 15px auto 0; border-radius: 10px; }
+
+/* LINKS TO OLD EDITIONS */
+.edition-links { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-bottom: 70px; }
+.edition-links a { padding: 18px 45px; border-radius: 999px; font-weight: 700; text-decoration: none; color: white; background: linear-gradient(90deg, var(--secondary), #ff9100); box-shadow: 0 0 30px rgba(255,110,0,0.5); transition: 0.35s; }
+.edition-links a:hover { transform: translateY(-6px) scale(1.05); }
+
+/* GALLERY GRID */
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+.gallery-grid img { width: 100%; height: 220px; object-fit: cover; border-radius: var(--radius); cursor: pointer; transition: 0.35s; box-shadow: var(--shadow); }
+.gallery-grid img:hover { transform: scale(1.05); }
+
+/* MODAL */
+.modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; }
+.modal-content { max-width: 80%; max-height: 80%; border-radius: 15px; }
+.close { position: absolute; top: 30px; right: 50px; font-size: 2.5rem; color: white; cursor: pointer; }
+
+/* FOOTER */
+footer { padding: 60px; text-align: center; background: black; margin-top: 80px; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo"><i class="fas fa-running"></i> МарицаRUN</a>
+  <div class="menu-toggle" id="mobile-menu"><span></span><span></span><span></span></div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">Начало</a></li>
+    <li><a href="information.html">Информация</a></li>
+    <li><a href="https://tracksport.live/e/maricarien-2026" target="_blank" rel="noopener noreferrer">Записване</a></li>
+    <li><a href="gallery.html" class="active">Галерия</a></li>
+    <li><a href="spons.html">Спонсори</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero reveal">
+  <div class="hero-content">
+    <h1>Галерия</h1>
+    <p>Спомени от МарицаRUN и предишни издания</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="section">
+
+  <h2 class="section-title reveal">Снимки от предишни издания</h2>
+
+  <!-- LINKS -->
+  <div class="edition-links reveal">
+    <a href="https://photos.app.goo.gl/dZzPrgV4QMUwFx7u8" target="_blank">📸 Снимки 2025 (май)</a>
+    <a href="https://photos.app.goo.gl/VAibnDcmwawvsZ2U7" target="_blank">📸 Снимки 2025 (август)</a>
+  </div>
+
+  <h2 class="section-title reveal">Избрани снимки</h2>
+
+  <!-- GRID -->
+  <div class="gallery-grid">
+    <img src="DSC08181.jpg" class="gallery-img reveal" alt="">
+    <img src="DSC03713.jpg" class="gallery-img reveal" alt="">
+    <img src="_DSC9961.jpg" class="gallery-img reveal" alt="">
+    <img src="DSC01832.jpg" class="gallery-img reveal" alt="">
+    <img src="_DSC0492.jpg" class="gallery-img reveal" alt="">
+    <img src="DSC07983.jpg" class="gallery-img reveal" alt="">
+  </div>
+
+</section>
+
+<!-- MODAL -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2025 МарицаRUN. Всички права запазени.</p>
+</footer>
+
+<!-- SCRIPT -->
+<script>
+  // Mobile Menu
+  const mobileMenu = document.getElementById("mobile-menu");
+  const navLinks = document.getElementById("nav-links");
+
+  mobileMenu.addEventListener("click", function () {
+    navLinks.classList.toggle("active");
+    document.body.style.overflow = navLinks.classList.contains("active") ? "hidden" : "";
+  });
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => { navLinks.classList.remove("active"); document.body.style.overflow = ""; });
+  });
+
+  // Modal Gallery
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const closeBtn = document.querySelector(".close");
+
+  document.querySelectorAll(".gallery-img").forEach(img => {
+    img.addEventListener("click", function () {
+      modal.style.display = "flex";
+      modalImg.src = this.src;
+    });
+  });
+
+  closeBtn.addEventListener("click", function () { modal.style.display = "none"; });
+  window.addEventListener("click", function (e) { if(e.target === modal) modal.style.display = "none"; });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll(".reveal");
+  function revealOnScroll() {
+    reveals.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      if(top < windowHeight - 120) el.classList.add("active");
+    });
+  }
+  window.addEventListener("scroll", revealOnScroll);
+  window.addEventListener("load", revealOnScroll);
+</script>
+
+</body>
+</html>
+
