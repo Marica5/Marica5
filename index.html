@@ -213,8 +213,13 @@ text-shadow: 0 2px 12px rgba(0,0,0,0.5);
 
 /* BUTTON */
 
+.btn-container{
+margin-top:30px;
+display:flex;
+justify-content:center;
+}
+
 .btn{
-margin-top:35px;
 padding:18px 55px;
 border-radius:999px;
 font-weight:700;
@@ -226,12 +231,15 @@ color:white;
 background:linear-gradient(90deg,var(--secondary),#ff9100);
 box-shadow:0 0 35px rgba(255,110,0,0.6);
 transition:0.35s;
+text-decoration:none;
+display:inline-block;
 }
 
 .btn:hover{
 transform:translateY(-6px) scale(1.05);
 box-shadow:0 0 50px rgba(255,110,0,0.9);
 }
+
 
 /* INFO CARD */
 
@@ -440,10 +448,10 @@ left:0;
 <!-- НОВ: статичен надпис за началото на състезанието -->
 <p class="start-date">Начало на състезанието: 02.05.2026г 10:00ч.</p>
 
-<div class="btn-container reveal">
- <button class="btn" onclick="window.open('https:/tracksport.live/e/maricarien-2026', '_blank')">
-    Запиши се сега
-  </button>
+<div class="btn-container">
+<a href="https://tracksport.live/e/maricarien-2026" target="_blank" class="btn">
+Запиши се сега
+</a>
 </div>
 
 </div>
@@ -470,7 +478,7 @@ left:0;
 
 <div class="info-slideshow">
 
-<img src="_DSC9961.jpg" class="active">
+<img src="DSC9961.jpg" class="active">
 <img src="DSC01832.jpg">
 <img src="DSC03713.jpg">
 <img src="DSC03830.jpg">
